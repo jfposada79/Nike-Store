@@ -2,7 +2,6 @@ const FlexContent = ({
   ifExist,
   endPoint: { heading, title, text, img, url, btn }
 }) => {
-  console.log(ifExist)
   return (
     <>
       <div
@@ -40,7 +39,11 @@ const FlexContent = ({
           <img
             src={img}
             alt={title}
-            className='w-auto object-fill transitions-theme'
+            className={`w-auto object-fill transitions-theme ${
+              ifExist
+                ? "h-60 lg:h-56 md:h-52 sm:h-44 xsm:h-36 rotate-6 hover:-rotate-12"
+                : "h-72 lg:h-64 md:h-60 sm:h-48 xsm:h-40 rotate-[19deg] hover:rotate-12"
+            }`}
           />
         </div>
       </div>
