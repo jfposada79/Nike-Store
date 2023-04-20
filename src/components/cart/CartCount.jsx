@@ -1,6 +1,6 @@
 import { ChevronDoubleLeftIcon, XMarkIcon } from "@heroicons/react/24/solid"
 
-const CartCount = ({ onCartToggle }) => {
+const CartCount = ({ onCartToggle, onClearCartItems }) => {
   return (
     <>
       <div className='bg-white h-11 flex items-center justify-between px-3 sticky top-0 left-0 right-0 w-full'>
@@ -24,6 +24,7 @@ const CartCount = ({ onCartToggle }) => {
           <button
             type='button'
             className='rounded bg-theme-cart active:scale-90 p-0.5'
+            onClick={onClearCartItems}
           >
             <XMarkIcon className='w-5 h-5 text-white stroke-[2]' />
           </button>

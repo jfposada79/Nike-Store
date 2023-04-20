@@ -1,10 +1,15 @@
 import { useDispatch } from "react-redux"
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline"
-import { setRemoveItemFromCart } from "../../app/CardSlice"
+import {
+  setRemoveItemFromCart,
+  setIncreaseItemQTY,
+  setDecreaseItemQTY
+} from "../../app/CardSlice"
 const CartItem = ({
   item: { id, title, text, img, price, color, shadow, cartQuantity }
 }) => {
   const dispatch = useDispatch()
+
   const onRemoveItem = () => {
     dispatch(
       setRemoveItemFromCart({
@@ -19,6 +24,36 @@ const CartItem = ({
       })
     )
   }
+
+  const onIncreaseItemQTY = () => {
+    dispatch(
+      setIncreaseItemQTY({
+        id,
+        title,
+        text,
+        img,
+        price,
+        color,
+        shadow,
+        cartQuantity
+      })
+    )
+  }
+  const onDecreaseItemQTY = () => {
+    dispatch(
+      setDecreaseItemQTY({
+        id,
+        title,
+        text,
+        img,
+        price,
+        color,
+        shadow,
+        cartQuantity
+      })
+    )
+  }
+
   return (
     <>
       <div className='flex items-center justify-between w-full px-5'>
@@ -43,6 +78,7 @@ const CartItem = ({
               <button
                 type='button'
                 className='bg-theme-cart rounded w-6 h-6 lg:w-5 lg:h-5 flex items-center justify-center active:scale-90'
+                onClick={onDecreaseItemQTY}
               >
                 <MinusIcon className='w-5 h-5 lg:w-4 lg:h-4 text-white stroke-[2]' />
               </button>
@@ -52,6 +88,7 @@ const CartItem = ({
               <button
                 type='button'
                 className='bg-theme-cart rounded w-6 h-6 lg:w-5 lg:h-5 flex items-center justify-center active:scale-90'
+                onClick={onIncreaseItemQTY}
               >
                 <PlusIcon className='w-5 h-5 lg:w-4 lg:h-4 text-white stroke-[2]' />
               </button>

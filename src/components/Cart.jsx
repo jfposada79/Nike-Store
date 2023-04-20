@@ -5,7 +5,8 @@ import CartItem from "./cart/CartItem"
 import {
   setCloseCart,
   selectCartState,
-  selectCartItems
+  selectCartItems,
+  setClearCartItems
 } from "../app/CardSlice"
 
 const Cart = () => {
@@ -19,6 +20,10 @@ const Cart = () => {
         cartState: false
       })
     )
+  }
+
+  const onClearCartItems = () => {
+    dispatch(setClearCartItems())
   }
   return (
     <>
@@ -36,7 +41,10 @@ const Cart = () => {
               : "opacity-0 invisible translate-x-8"
           }`}
         >
-          <CartCount onCartToggle={onCartToggle} />
+          <CartCount
+            onCartToggle={onCartToggle}
+            onClearCartItems={onClearCartItems}
+          />
           {cartItems.length === 0 ? (
             <CartEmpty />
           ) : (
