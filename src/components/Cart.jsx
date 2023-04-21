@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import CartCount from "./cart/CartCount"
 import CartEmpty from "./cart/CartEmpty"
@@ -6,13 +7,22 @@ import {
   setCloseCart,
   selectCartState,
   selectCartItems,
-  setClearCartItems
+  setClearCartItems,
+  setGetTotals,
+  selectTotalAmount,
+  selectTotalQTY
 } from "../app/CardSlice"
 
 const Cart = () => {
   const dispatch = useDispatch()
   const ifCartState = useSelector(selectCartState)
   const cartItems = useSelector(selectCartItems)
+  const totalAmount = useSelector(selectTotalAmount)
+  const totalQTY = useSelector(selectTotalQTY)
+
+  useEffect(() => {
+    dispatch(setGetTotals())
+  }, [cartItems, dispatch])
 
   const onCartToggle = () => {
     dispatch(
@@ -44,9 +54,10 @@ const Cart = () => {
           <CartCount
             onCartToggle={onCartToggle}
             onClearCartItems={onClearCartItems}
+            totalQTY={totalQTY}
           />
-          {cartItems.length === 0 ? (
-            <CartEmpty />
+          {cartItems?.length === 0 ? (
+            <CartEmpty onCartToggle={onCartToggle} />
           ) : (
             <div>
               <div className='flex items-start justify-start flex-col gap-y-7 lg:gap-y-5 overflow-y-scroll h-[81vh] scroll-smooth scroll-hidden py-3'>
@@ -60,7 +71,7 @@ const Cart = () => {
                     SubTotal
                   </h1>
                   <h1 className='text-sm rounded bg-theme-cart text-slate-100 px-1 py-0.5'>
-                    Total Amount = 000
+                    ${totalAmount}
                   </h1>
                 </div>
                 <div className='grid items-center gap-2'>
